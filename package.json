@@ -46,7 +46,7 @@
     "node-underscorify": "0.0.14",
     "require-dot-file": "^0.4.0",
     "run-sequence": "*",
-    "semantic-ui": "^2.0.0",
+    "semantic-ui-less": "^2.0.0",
     "underscore": "*",
     "vinyl-buffer": "*",
     "vinyl-source-stream": "*",
