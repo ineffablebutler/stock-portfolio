@@ -18,6 +18,7 @@ var sourcemaps  = require('gulp-sourcemaps');
 var gulpif      = require('gulp-if');
 var prefix      = require('gulp-autoprefixer');
 var concat      = require('gulp-concat');
+var underscorify = require("node-underscorify");
 
 // Tasks
 // -------------------------
@@ -30,13 +31,13 @@ var uglify = function() {
 // Build tasks
 gulp.task('browserify', function() {
   var b = browserify('./client/js/app.js', {debug: true})
-  return b.transform(hbsfy)
+  return b.transform(underscorify)
     .bundle()
     .pipe(source('app.browserified.js'))
     .pipe(gulp.dest('./build'))
 });
 
-gulp.task('minify', ['styles'], function() {
+gulp.task('minify', ['cleancss', 'styles'], function() {
   return gulp.src('./build/bundle.css')
     .pipe(minifyCSS())
     .pipe(rename('app.min.css'))
@@ -52,7 +53,7 @@ gulp.task('uglify', function() {
 
 // Style tasks
 gulp.task('styles', function() {
-  return gulp.src('./client/less/index.less')
+  return gulp.src('./client/semantic/src/semantic.less')
     .pipe(less())
     .pipe(prefix({ cascade: true }))
     .pipe(rename('bundle.css'))
@@ -60,8 +61,12 @@ gulp.task('styles', function() {
 });
 
 // Clean tasks
-gulp.task('clean', ['cleanbuild'], function(done) {
-  del(['./public/js', './public/css'], done)
+gulp.task('cleancss', ['cleanbuild'], function(done) {
+  del(['./public/css'], done)
+});
+
+gulp.task('cleanjs', ['cleanbuild'], function(done) {
+  del(['./public/js'], done)
 });
 
 gulp.task('cleanbuild', function(done) {
@@ -69,15 +74,15 @@ gulp.task('cleanbuild', function(done) {
 });
 
 // commands
-gulp.task('build', ['clean'], function(done) {
-  return runSequence('browserify', 'uglify', 'minify', 'cleanbuild', done);
+gulp.task('build', ['cleanjs'], function(done) {
+  return runSequence('browserify', 'uglify', 'cleanbuild', done);
 });
 
 gulp.task('watch', function(done){
   return runSequence('build', function() {
     gulp.watch('./client/js/**/*.js', ['build']);
-    gulp.watch('./client/templates/*.hbs', ['build']);
-    gulp.watch('./client/less/*.less', ['build']);
+    gulp.watch('./client/templates/*.html', ['build']);
+    // gulp.watch('./client/semantic/*.less', ['build']);
     done()
   })
 });
