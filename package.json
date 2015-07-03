@@ -10,6 +10,7 @@
     "better-console": "^0.2.4",
     "body-parser": "*",
     "browserify": "*",
+    "d3": "^3.5.5",
     "del": "*",
     "express": "*",
     "extend": "^3.0.0",
