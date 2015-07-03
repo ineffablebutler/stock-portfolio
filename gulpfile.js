@@ -37,12 +37,6 @@ gulp.task('browserify', function () {
     .pipe(gulp.dest('./build'));
 });
 
-gulp.task('minify', ['cleancss', 'styles'], function () {
-  return gulp.src('./build/bundle.css')
-    .pipe(minifyCSS())
-    .pipe(rename('app.min.css'))
-    .pipe(gulp.dest('./public/css'));
-});
 
 gulp.task('uglify', function () {
   return gulp.src('build/app.browserified.js')
@@ -51,13 +45,12 @@ gulp.task('uglify', function () {
     .pipe(gulp.dest('public/js'));
 });
 
-// Style tasks
-gulp.task('styles', function () {
-  return gulp.src('./node_modules/semantic-ui-less/semantic.less')
-    .pipe(less())
-    .pipe(prefix({ cascade: true }))
-    .pipe(rename('bundle.css'))
-    .pipe(gulp.dest('./build'));
+gulp.task('cleanjs', ['cleanbuild'], function (done) {
+  del(['./public/js'], done);
+});
+
+gulp.task('cleanbuild', function (done) {
+  del(['./build'], done);
 });
 
 // Clean tasks
@@ -65,12 +58,24 @@ gulp.task('cleancss', ['cleanbuild'], function (done) {
   del(['./public/css'], done);
 });
 
-gulp.task('cleanjs', ['cleanbuild'], function (done) {
-  del(['./public/js'], done);
+// Style tasks
+gulp.task('less', function () {
+  return gulp.src('./client/less/app.less')
+    .pipe(less())
+    .pipe(prefix({ cascade: true }))
+    .pipe(rename('bundle.css'))
+    .pipe(gulp.dest('./build'));
 });
 
-gulp.task('cleanbuild', function (done) {
-  del(['./build'], done);
+gulp.task('minify', function () {
+  return gulp.src('./build/bundle.css')
+    .pipe(minifyCSS())
+    .pipe(rename('app.min.css'))
+    .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('css', function (done) {
+  return runSequence('cleancss', 'less', 'minify', done);
 });
 
 // commands

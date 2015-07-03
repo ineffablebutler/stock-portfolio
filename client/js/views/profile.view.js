@@ -10,7 +10,7 @@ var ProfileView = Backbone.View.extend({
   },
   render: function () {
     this.$el.html(_.template(this.template({
-      name: 'bbebbe'
+      title: this.model.get('title')
     })));
   }
 });

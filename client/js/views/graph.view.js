@@ -9,7 +9,6 @@ var GraphView = Backbone.View.extend({
     this.template = require('../../templates/graph.template.html');
   },
   render: function () {
-    console.log('this.model: ', this.model.attributes);
     this.$el.html(_.template(this.template({
       name: 'template ooo'
     })));
