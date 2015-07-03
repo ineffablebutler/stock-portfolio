@@ -10,7 +10,6 @@ var browserify  = require('browserify');
 var rename      = require('gulp-rename');
 var del         = require('del');
 var gulpuglify  = require('gulp-uglify');
-var hbsfy       = require('hbsfy');
 var source      = require('vinyl-source-stream');
 var runSequence = require('run-sequence');
 var livereload  = require('gulp-livereload');
