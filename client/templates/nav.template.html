@@ -2,9 +2,17 @@
 <a class="item" href="#/trends" id="trends">Trends</a>
 <div class="right menu">
   <div class="item">
-    <div class="ui transparent icon input">
-      <input type="text" placeholder="Search...">
-      <i class="search link icon"></i>
+    <div class="ui search"> 
+        <label for="symbol">Stock Symbol</label>
+        <input class="prompt" pattern="[a-zA-Z0-9-]{1,15}" maxlength="15" type="text" id="symbol" required>
+        <div class="results"></div>
     </div>
-  </div>
+  </div>  
 </div>
+
+
+
+
+
+
+  
