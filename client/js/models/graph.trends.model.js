@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
-var graphTrendsModel = Backbone.Model.extend({
+var GraphTrendsModel = Backbone.Model.extend({
   defaults: {
     datas: [{
       key: "Long",
@@ -440,4 +440,4 @@ var graphTrendsModel = Backbone.Model.extend({
     }]
   }
 });
-module.exports = graphTrendsModel;
+module.exports = GraphTrendsModel;

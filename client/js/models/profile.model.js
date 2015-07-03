@@ -2,10 +2,10 @@ var Backbone = require('backbone');
 var _ = require('underscore');
 
 
-var profileModel = Backbone.Model.extend({
+var ProfileModel = Backbone.Model.extend({
   defaults: {
     title: "Profile"
   }
 });
 
-module.exports = profileModel;
+module.exports = ProfileModel;
