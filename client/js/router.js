@@ -1,4 +1,6 @@
 var Backbone = require('backbone');
+var DashboardModel = require('./models/dashboard.model');
+var ProfileModel = require('./models/profile.model');
 var DashboardView = require('./views/dashboard.view');
 var NavView = require('./views/nav.view');
 var TrendsView = require('./views/trends.view');
@@ -6,13 +8,12 @@ var ProfileView = require('./views/profile.view');
 var PortfoliosView = require('./views/portfolios.view');
 var Router = Backbone.Router.extend({
   routes: {
-    'following/:id': 'following',
-    'followers/:id': 'follower',
+    'following/:id': 'profile',
+    'followers/:id': 'profile',
     'portfolios/:id': 'portfolios',
     'company/:id': 'company',
-    'profile': 'profile',
     'trends': 'trends',
-    '*other': 'dashboard'
+    '*other': 'profile'
   },
   dashboard: function () {
     console.log("router default");
@@ -39,12 +40,21 @@ var Router = Backbone.Router.extend({
     trendsView.render('trends');
     navView.render('trends');
   },
-  profile: function () {
-    console.log("profile");
-    var profileView = new ProfileView();
-    var navView = new NavView();
-    profileView.render();
-    navView.render('profile');
+  profile: function (id) {
+    if(id){
+      var profileModel = new ProfileModel({id: id});
+      var profileView = new ProfileView({model: profileModel});
+      var navView = new NavView();
+      profileView.render();
+      navView.render();
+    } else {
+      console.log("profile");
+      var dashboardModel = new DashboardModel();
+      var profileView = new ProfileView({model: dashboardModel});
+      var navView = new NavView();
+      profileView.render();
+      navView.render('dashboard');
+    }
   }
 });
 module.exports = Router;
