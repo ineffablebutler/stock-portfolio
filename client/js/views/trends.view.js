@@ -18,8 +18,6 @@ var TrendsView = Backbone.View.extend({
     var graphView = new GraphView({model: new GraphTrendsModel() });
     this.$("#trends-overview").html(graphView.el);
     graphView.render();
-    console.log('graph:', graphView.el);
-
   }
 });
 module.exports = TrendsView;
