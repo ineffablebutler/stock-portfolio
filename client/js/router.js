@@ -4,7 +4,6 @@ var NavView = require('./views/nav.view');
 var TrendsView = require('./views/trends.view');
 var ProfileView = require('./views/profile.view');
 var PortfoliosView = require('./views/portfolios.view');
-var $ = require("jquery");
 var Router = Backbone.Router.extend({
   routes: {
     'following/:id': 'following',
