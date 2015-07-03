@@ -24,7 +24,6 @@ var navView = Backbone.View.extend({
   handleAutoComplete: function(){
     var query = $(".prompt").val();
     if(query.length>0){
-      console.log(query); 
       $.ajax({
           type: 'GET',
           url:'/auto',
