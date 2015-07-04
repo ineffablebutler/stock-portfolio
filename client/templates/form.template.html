@@ -1,0 +1,21 @@
+<form class="ui form">
+  <div class="field">
+    <label>Ticker Symbol</label>
+    <div class="field">
+      <input type="text" pattern="[a-zA-Z0-9-]{1,6}" maxlength="6" id="symbol" required>
+    </div>
+  </div>
+  <div class="field">
+    <label>Date</label>
+    <div class="field">
+      <input pattern="^(?!.*00/).*$" type="date" id="date" required>
+    </div>
+  </div>
+  <div class="field">
+    <label>Amount ($)</label>
+    <div class="field">
+      <input type="number" id="amount" required>
+    </div>
+  </div>
+  <input type="submit" class="ui button right floated"></div>
+</form>
